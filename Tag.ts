@@ -47,3 +47,5 @@ console.log(new Tag("label", { for: "email" }, "Email").toString());
 
 console.log(new Tag("div").toString());
 // <div></div>
+
+export default Tag;

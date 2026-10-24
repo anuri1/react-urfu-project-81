@@ -7,9 +7,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "../node_modules/.bin/vitest run",
+    "test": "vitest run",
     "lint": "eslint .",
-    "typecheck": "../node_modules/.bin/tsc --noEmit"
+    "typecheck": "../node_modules/.bin/tsc --noEmit",
+    "test-coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -22,12 +22,10 @@ jobs:
       - name: Lint
         run: make lint
 
-      # Раскомментируйте после того, как напишете тесты,
-      # добавите секрет SONAR_TOKEN и цель test-coverage в Makefile
-      # - name: Test with coverage
-      #   run: make test-coverage
-      #
-      # - name: SonarQube scan
-      #   uses: SonarSource/sonarqube-scan-action@v5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Test with coverage
+        run: make test-coverage
+
+      - name: SonarQube scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -6,6 +6,8 @@
 
 Учебный проект Хекслета: https://ru.hexlet.io/
 
+[![CI](https://github.com/anuri1/react-urfu-project-81/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/anuri1/react-urfu-project-81/actions/workflows/github-actions-demo.yml)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=anuri1_react-urfu-project-81&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=anuri1_react-urfu-project-81)
 
 ## Стек
 

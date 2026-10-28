@@ -27,6 +27,24 @@ cd react-urfu-project-81
 
 ## Использование
 
+## Использование
+
+```ts
+import HexletCode from "@hexlet/code";
+
+const template = { name: "rob", job: "hexlet", gender: "m" };
+
+const form = HexletCode.formFor(template, { url: "/users" }, (f) => {
+  f.input("name", { class: "user-input" });
+  f.input("job", { as: "textarea", rows: 50, cols: 50 });
+});
+
+console.log(form);
+// <form action="/users" method="post"><input name="name" type="text" value="rob" class="user-input"><textarea cols="50" rows="50" name="job">hexlet</textarea></form>
+```
+
+Если поля нет в шаблоне, будет выброшена ошибка `Field 'age' does not exist in the template.`
+
 <!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
 
 ---

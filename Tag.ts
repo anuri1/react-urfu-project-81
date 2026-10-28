@@ -1,5 +1,5 @@
 class Tag {
-    private pairTags: Array<string> = ["label", "div", "form"];
+    private pairTags: Array<string> = ["label", "div", "form", "textarea"];
 
     constructor(
         private name: string,

@@ -5,7 +5,7 @@ export default defineConfig({
         coverage: {
             provider: "v8",
             reporter: ["text", "lcov"],
-            include: ["Tag.ts"],
+            include: ["Tag.ts", "HexletCode.ts"],
         },
     },
 });

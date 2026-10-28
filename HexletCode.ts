@@ -21,6 +21,9 @@ class Form {
 
         const value = String(this.template[name]);
         const { as, ...rest } = options;
+        const labelText = name.charAt(0).toUpperCase() + name.slice(1);
+
+        this.fields.push(new Tag("label", { for: name }, labelText).toString());
 
         if (as === "textarea") {
             const attrs = toAttrs({ cols: 20, rows: 40, name, ...rest });
@@ -30,6 +33,12 @@ class Form {
 
         const attrs = toAttrs({ name, type: "text", value, ...rest });
         this.fields.push(new Tag("input", attrs).toString());
+    }
+
+    submit(text = "Save"): void {
+        this.fields.push(
+            new Tag("input", { type: "submit", value: text }).toString(),
+        );
     }
 
     render(): string {

@@ -2,9 +2,14 @@ import Tag from "./Tag.js";
 
 type Template = Record<string, unknown>;
 type FormOptions = { url?: string; method?: string };
-type InputOptions = Record<string, string | number>;
+type Attrs = Record<string, string | number>;
+type InputOptions = {
+    as?: string;
+    label?: string;
+    labelHtml?: Attrs;
+} & Record<string, unknown>;
 
-const toAttrs = (attrs: InputOptions): Record<string, string> =>
+const toAttrs = (attrs: Record<string, unknown>): Record<string, string> =>
     Object.fromEntries(
         Object.entries(attrs).map(([key, value]) => [key, String(value)]),
     );
@@ -20,10 +25,12 @@ class Form {
         }
 
         const value = String(this.template[name]);
-        const { as, ...rest } = options;
-        const labelText = name.charAt(0).toUpperCase() + name.slice(1);
+        const { as, label, labelHtml, ...rest } = options;
+        const labelText =
+            label ?? name.charAt(0).toUpperCase() + name.slice(1);
+        const labelAttrs = toAttrs({ for: name, ...labelHtml });
 
-        this.fields.push(new Tag("label", { for: name }, labelText).toString());
+        this.fields.push(new Tag("label", labelAttrs, labelText).toString());
 
         if (as === "textarea") {
             const attrs = toAttrs({ cols: 20, rows: 40, name, ...rest });
@@ -56,7 +63,7 @@ class HexletCode {
         callback?.(form);
 
         const action = options.url ?? "#";
-        return new Tag("form", { action, method: "post" }, form.render()).toString();
+        return new Tag("form", { method: "post", action }, form.render()).toString();
     }
 }
 

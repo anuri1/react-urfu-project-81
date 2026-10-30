@@ -6,19 +6,19 @@ describe("HexletCode.formFor", () => {
 
     test("empty form with default action", () => {
         expect(HexletCode.formFor(template, {}, () => {})).toBe(
-            '<form action="#" method="post"></form>',
+            '<form method="post" action="#"></form>',
         );
     });
 
     test("form with custom url", () => {
         expect(HexletCode.formFor(template, { url: "/users" }, () => {})).toBe(
-            '<form action="/users" method="post"></form>',
+            '<form method="post" action="/users"></form>',
         );
     });
 
     test("works without options and callback", () => {
         expect(HexletCode.formFor(template)).toBe(
-            '<form action="#" method="post"></form>',
+            '<form method="post" action="#"></form>',
         );
     });
 
@@ -29,7 +29,7 @@ describe("HexletCode.formFor", () => {
         });
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="name">Name</label>' +
             '<input name="name" type="text" value="rob">' +
             '<label for="job">Job</label>' +
@@ -45,7 +45,7 @@ describe("HexletCode.formFor", () => {
         });
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="name">Name</label>' +
             '<input name="name" type="text" value="rob" class="user-input">' +
             '<label for="job">Job</label>' +
@@ -60,7 +60,7 @@ describe("HexletCode.formFor", () => {
         );
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="job">Job</label>' +
             '<textarea cols="20" rows="40" name="job">hexlet</textarea>' +
             "</form>",
@@ -73,7 +73,7 @@ describe("HexletCode.formFor", () => {
         );
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="job">Job</label>' +
             '<textarea cols="50" rows="50" name="job">hexlet</textarea>' +
             "</form>",
@@ -98,7 +98,7 @@ describe("HexletCode.formFor", () => {
         });
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="name">Name</label>' +
             '<input name="name" type="text" value="rob">' +
             '<label for="job">Job</label>' +
@@ -116,7 +116,7 @@ describe("HexletCode.formFor", () => {
         });
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<label for="name">Name</label>' +
             '<input name="name" type="text" value="rob">' +
             '<label for="job">Job</label>' +
@@ -130,8 +130,24 @@ describe("HexletCode.formFor", () => {
         const form = HexletCode.formFor(template, {}, (f) => f.submit());
 
         expect(form).toBe(
-            '<form action="#" method="post">' +
+            '<form method="post" action="#">' +
             '<input type="submit" value="Save">' +
+            "</form>",
+        );
+    });
+
+    test("label and labelHtml options", () => {
+        const form = HexletCode.formFor(template, {}, (f) => {
+            f.input("name", {
+                label: "User",
+                labelHtml: { class: "form-label", id: "name-label" },
+            });
+        });
+
+        expect(form).toBe(
+            '<form method="post" action="#">' +
+            '<label for="name" class="form-label" id="name-label">User</label>' +
+            '<input name="name" type="text" value="rob">' +
             "</form>",
         );
     });
